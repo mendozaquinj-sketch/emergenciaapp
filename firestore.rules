@@ -1,0 +1,27 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Perfiles: lectura pública (necesaria para el QR), escritura solo del dueño
+    match /profiles/{profileId} {
+      allow read: if true;
+      allow create: if request.auth != null
+                    && request.resource.data.ownerId == request.auth.uid;
+      allow update, delete: if request.auth != null
+                    && resource.data.ownerId == request.auth.uid;
+    }
+
+    // Escaneos: cualquiera puede crear uno (se genera al ver un perfil público),
+    // pero solo el backend/Functions o el propio dueño debería poder leerlos.
+    match /scans/{scanId} {
+      allow create: if true;
+      allow read: if false; // los lee la Cloud Function con permisos de administrador
+    }
+
+    // Tokens de notificación del usuario (para push al escanear)
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+  }
+}
