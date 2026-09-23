@@ -7,6 +7,7 @@ import { db } from "@/lib/firebase";
 import { useAuth } from "@/components/AuthProvider";
 import { Profile, ProfileType } from "@/lib/types";
 import QRCode from "@/components/QRCode";
+import { getBaseUrl } from "@/lib/site";
 
 export default function ProfileForm() {
   const { user } = useAuth();
@@ -47,7 +48,7 @@ export default function ProfileForm() {
         createdAt: serverTimestamp(),
       });
 
-      const url = `${window.location.origin}/p/${docRef.id}`;
+      const url = `${getBaseUrl()}/p/${docRef.id}`;
       setQrUrl(url);
     } catch (err) {
       console.error(err);

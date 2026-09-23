@@ -56,7 +56,15 @@ git push -u origin main
 1. "Add New Project" → importar el repositorio de GitHub.
 2. En Settings → Environment Variables, pega las mismas variables que
    tienes en tu `.env.local`.
-3. Deploy. Cada `git push` a `main` vuelve a desplegar automáticamente.
+3. **Importante:** agrega también `NEXT_PUBLIC_APP_URL` con tu dominio
+   principal de producción (el que NO tiene "-git-main-" ni un código
+   raro, ej. `https://emergenciaapp-mxk7.vercel.app`). Sin esta variable,
+   si generas un perfil estando en una URL de "preview", el QR quedará
+   apuntando a una URL protegida por el login de Vercel.
+4. Deploy. Cada `git push` a `main` vuelve a desplegar automáticamente.
+5. Si ya tenías perfiles creados antes de agregar esta variable, sus QR
+   viejos quedaron mal generados — bórralos y créalos de nuevo, o
+   simplemente crea perfiles nuevos de prueba después de este cambio.
 
 ## Estructura
 ```
