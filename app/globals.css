@@ -3,5 +3,8 @@
 @tailwind utilities;
 
 body {
-  @apply bg-white text-gray-900;
+  @apply text-gray-900;
+  background-color: #fffafa;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cg fill='%23D7263D' fill-opacity='0.05'%3E%3Cpath d='M27 14h6v10h10v6H33v10h-6V30H17v-6h10z'/%3E%3C/g%3E%3C/svg%3E");
+  background-repeat: repeat;
 }
